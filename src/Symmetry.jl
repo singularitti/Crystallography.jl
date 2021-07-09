@@ -218,7 +218,7 @@ function genpath(nodes, densities)
         for (i, (thisnode, nextnode, density)) in
             enumerate(zip(nodes, circshift(nodes, -1), densities))
             step = @. (nextnode - thisnode) / density
-            for j in 1:density
+            for j = 1:density
                 path[s+j] = @. thisnode + j * step
             end
             s += density
@@ -233,7 +233,7 @@ function genpath(nodes, densities)
     end
 end
 genpath(nodes, density::Integer, iscircular::Bool = false) =
-    genpath(nodes, (density for _ in 1:(length(nodes)-(iscircular ? 0 : 1))))
+    genpath(nodes, (density for _ = 1:(length(nodes)-(iscircular ? 0 : 1))))
 
 Base.getindex(A::SeitzOperator, I::Vararg{Int}) = getindex(A.data, I...)
 
